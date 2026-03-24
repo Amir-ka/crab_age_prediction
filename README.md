@@ -7,7 +7,7 @@
 
 ## 📋 Overview
 
-This project tackles the [Crab Age Prediction](https://www.kaggle.com/) Kaggle competition, where the goal is to regress crab age from 8 physical body measurements. Accurate age estimation is valuable in marine biology and aquaculture as a non-invasive alternative to the traditional ring-counting method.
+This project tackles the [Crab Age Prediction](https://www.kaggle.com/competitions/midterm-dsci-6003-spring-2026) Kaggle competition, where the goal is to regress crab age from 8 physical body measurements. Accurate age estimation is valuable in marine biology and aquaculture as a non-invasive alternative to the traditional ring-counting method.
 
 | | |
 |---|---|
