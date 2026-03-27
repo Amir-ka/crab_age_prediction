@@ -1,7 +1,7 @@
 # 🦀 Crab Age Prediction | Kaggle Regression Competition
 
 > **Predict the age of crabs from physical measurements using an optimized gradient boosting ensemble.**  
-> Final Kaggle MAE: **1.317** · CV MAE: **1.256** · Top ensemble of LightGBM + XGBoost + CatBoost
+> Final Kaggle MAE: **1.317** · CV MAE(??TODO): **1.256** · Top ensemble of LightGBM + XGBoost + CatBoost
 
 ---
 
@@ -16,7 +16,7 @@ This project tackles the [Crab Age Prediction](https://www.kaggle.com/competitio
 | **Train size** | 15,000 samples |
 | **Test size** | 10,000 samples |
 | **Features (raw → engineered)** | 8 → 20 |
-| **CV MAE** | 1.2559 |
+| **CV MAE TODO** | 1.2559 |
 | **Kaggle MAE** | 1.31662 |
 
 ---
@@ -24,11 +24,10 @@ This project tackles the [Crab Age Prediction](https://www.kaggle.com/competitio
 ## 🗂️ Repository Structure
 
 ```
-├── ML_Mid_Final_Submission.ipynb   # Full pipeline notebook
+├── crab_age_prediction.ipynb       # Full pipeline notebook
 ├── train.csv                       # Training data
 ├── test.csv                        # Test data
-├── sample_submission.csv           # Submission format
-├── V1-2.csv                        # Final submission file
+├── prediction.csv                  # Final submission file
 └── README.md
 ```
 
@@ -38,12 +37,12 @@ This project tackles the [Crab Age Prediction](https://www.kaggle.com/competitio
 
 ### 1. Feature Engineering
 
-12 new features were derived from the 8 raw inputs, expanding the feature space to **20 total**:
+12(these are 11 TODO) new features were derived from the 8 raw inputs, expanding the feature space to **20 total**:
 
 | Feature | Formula | Rationale |
 |---|---|---|
 | `Volume` | `Length × Diameter × Height` | Shell volume proxy |
-| `Density` | `Weight / (Volume + ε)` | Body density |
+| `Density` | `Weight / (Volume + ε(What is this TODO ))` | Body density |
 | `Shucked_ratio` | `Shucked Weight / (Weight + ε)` | Meat-to-body ratio |
 | `Shell_ratio` | `Shell Weight / (Weight + ε)` | Shell fraction |
 | `Viscera_ratio` | `Viscera Weight / (Weight + ε)` | Gut fraction |
@@ -60,9 +59,9 @@ Each model was tuned independently using **Optuna** (30 trials, 5-fold CV, Bayes
 
 | Model | Best Trial | CV MAE | Key Params |
 |---|---|---|---|
-| LightGBM | 4 | **1.2866** | lr=0.0225, depth=9, leaves=117 |
-| XGBoost | 18 | 1.2899 | lr=0.0328, depth=4, min_child=22 |
-| CatBoost | 28 | 1.2888 | lr=0.0384, depth=8, l2_leaf=3.36 |
+| LightGBM | 4 | **1.2866** | learning rate=0.0225, depth=9, leaves=117 |
+| XGBoost | 18 | 1.2899 | learning rate=0.0328, depth=4, min_child=22 |
+| CatBoost | 28 | 1.2888 | learning rate=0.0384, depth=8, l2_leaf=3.36 |
 
 ### 3. Multi-Seed Training
 
@@ -92,7 +91,7 @@ Integer rounding consistently improved MAE, reflecting the discrete nature of th
 
 | | MAE |
 |---|---|
-| **CV (OOF)** | 1.2559 |
+| **CV (OOF(?TODO))** | 1.2559 |
 | **Kaggle Leaderboard** | 1.31662 |
 | CV → Leaderboard gap | +0.061 (+4.8%) |
 
@@ -135,7 +134,7 @@ jupyter notebook ML_Mid_Final_Submission.ipynb
 
 ## 💡 Key Takeaways
 
-- **Rounding matters**: Predicting integer ages by rounding continuous outputs reduced MAE more than any single modeling change
+- **Rounding matters**: Predicting integer ages by rounding continuous outputs reduced MAE
 - **Ensemble diversity**: All three models contributed meaningfully, LightGBM (leaf-wise), XGBoost (level-wise), and CatBoost (ordered boosting) offer genuinely different inductive biases
 - **Multi-seed averaging**: Running 3 seeds per model smoothed out initialization noise and improved OOF stability
 - **Feature ratios > raw features**: Weight composition ratios (shucked, shell, viscera) were the most impactful engineered features
